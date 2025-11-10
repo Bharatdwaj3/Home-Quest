@@ -1,0 +1,34 @@
+import './App.css'
+import {Home, Product} from './pages/index'
+import { BrowserRouter as Router, Routes, Route  } from 'react-router-dom'
+import { LocationMap, Navigation } from './components/layout/index'
+import {InsertTenant, TenantProfile} from './components/Tenant/index'
+import {InsertOwner, OwnerProfile} from './components/Owner/index'
+import {InsertPG, PgDetails} from './components/PG/index'
+import {Login, Signup} from './components/auth/index';
+function App() {
+
+  return (
+    <> 
+      <Router>
+        <Navigation/>
+        <Routes>
+          <Route path='/' element={<Home/> }/>  
+          <Route path='/rooms' element={<Product/> }/>  
+          <Route path='/rooms/:id' element={<PgDetails/> }/>  
+          <Route path='/map' element={<LocationMap/> }/>  
+          <Route path='/tenant-dashboard' element={<TenantProfile/> }/> 
+          <Route path='/owner-dashboard' element={<OwnerProfile/> }/>  
+          <Route path='/insertRooms' element={<InsertPG/> }/>  
+          <Route path='/insertTenant' element={<InsertTenant/> }/>
+          <Route path='/insertOwner' element={<InsertOwner/> }/>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signUp" element={<Signup />} />
+          <Route/>  
+        </Routes>
+      </Router> 
+    </>
+  )
+}
+
+export default App;

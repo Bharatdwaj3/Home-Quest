@@ -1,0 +1,225 @@
+/* === AUTH PAGE BACKGROUND === */
+.auth-bg {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #e0f2fe 0%, #ffffff 80%);
+  padding: 24px;
+}
+
+/* === AUTH CARD === */
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 36px;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* === TEXT === */
+.auth-title {
+  font-weight: 700;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.auth-subtitle {
+  text-align: center;
+  color: #6b7280;
+  margin-bottom: 16px;
+}
+
+/* === FORM === */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.auth-input {
+  margin-top: 8px;
+}
+
+.auth-button {
+  margin-top: 16px !important;
+  padding: 12px 0 !important;
+  border-radius: 10px !important;
+  background: #3b82f6 !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  border: none !important;
+  transition: all 0.2s ease-in-out;
+}
+
+.auth-button:hover {
+  background: #2563eb !important;
+}
+
+/* === FOOTER === */
+.auth-footer {
+  text-align: center;
+  margin-top: 16px;
+  color: #6b7280;
+}
+
+/* === INPUTS WITH ICONS === */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 12px 12px 44px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 16px;
+  background: #f9fafb;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.input-group input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  background: #fff;
+}
+
+.input-icon {
+  position: absolute;
+  left: 14px;
+  color: #9ca3af;
+  font-size: 18px;
+  pointer-events: none;
+}
+
+/* === FORM OPTIONS (Remember me + Forgot password) === */
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px 0;
+  font-size: 14px;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.custom-checkbox {
+  width: 16px;
+  height: 16px;
+  accent-color: #3b82f6;
+  cursor: pointer;
+}
+
+.forgot-link {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+/* === MESSAGES === */
+.success-message,
+.error-message {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+.success-message {
+  color: #059669;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+}
+
+.error-message {
+  color: #dc2626;
+  background: #fef2f2;
+  border: 1px solid #fca5a5;
+}
+
+/* === LOADER === */
+.loader {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+/* ----- ACCOUNT TYPE RADIO CARDS ----- */
+.account-type-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.account-type-card {
+  flex: 1;
+  position: relative;
+  cursor: pointer;
+}
+
+.account-type-card input[type=radio] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.account-type-card .card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 12px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fff;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.account-type-card input[type=radio]:checked + .card-content {
+  border-color: #3b82f6;
+  background: #eff6ff;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.15);
+}
+
+.account-type-card .card-content strong {
+  margin-top: 8px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.account-type-card .card-content small {
+  font-size: 0.8rem;
+  color: #6b7280;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}/*# sourceMappingURL=auth.css.map */

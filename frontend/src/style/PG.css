@@ -1,0 +1,97 @@
+.lodging-section {
+  position: relative;
+  height: 1500px;
+  background-color: #fef3c7;
+  margin-top: 70px;
+}
+@media (max-width: 768px) {
+  .lodging-section {
+    height: auto;
+    min-height: 1500px;
+  }
+}
+
+.lodging-header {
+  height: 200px;
+  width: 100vw;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 2rem;
+}
+.lodging-header .lodging-title {
+  border-bottom: 2px solid #78350f;
+  color: #78350f;
+  margin-left: 5rem;
+  padding-bottom: 0.5rem;
+  font-weight: 700;
+}
+@media (max-width: 768px) {
+  .lodging-header .lodging-title {
+    margin-left: 2rem;
+    font-size: 1.75rem;
+  }
+}
+
+.lodging-cards-container {
+  max-width: 1500px;
+  padding-left: 200px;
+  padding-right: 2rem;
+}
+@media (max-width: 992px) {
+  .lodging-cards-container {
+    padding-left: 3rem;
+  }
+}
+@media (max-width: 768px) {
+  .lodging-cards-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+.lodging-card {
+  border-radius: 0.5rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.lodging-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+.lodging-card .lodging-card-img {
+  height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+.lodging-card .card-body {
+  background-color: #fff;
+}
+.lodging-card .card-body .card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+.lodging-card .card-body .card-subtitle {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.lodging-card .card-body .card-text {
+  font-size: 0.9rem;
+  color: #4b5563;
+  line-height: 1.5;
+}
+.lodging-card .card-body .card-text strong {
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.lodging-detail-btn {
+  width: 100%;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+.lodging-detail-btn:hover {
+  background-color: rgb(1.762295082, 87.2336065574, 213.237704918);
+}/*# sourceMappingURL=PG.css.map */

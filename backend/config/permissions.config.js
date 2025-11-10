@@ -1,0 +1,51 @@
+const PERMISSIONS ={
+    admin:[
+        'create_pg',
+        'update_tenant',
+        'manage_users',
+        'create_room',
+        'view_rooms',
+        'update_room',
+        'delete_room',
+        'create_tenant',
+        'view_tenants',
+        'update_tenant',
+        'delete_tenant',
+        'create_owner',
+        'view_owners',
+        'update_owner',
+        'delete_owner',
+        'view-self',
+        'update-self',
+        'view_pg',
+        'view_pg'
+    ],
+    tenant:[
+        'view_rooms',
+        'view_tenants',
+        'update_room',
+        'update_tenant',
+        'view_self',
+        'update-self',
+        'view_owners',
+        'view_pg'
+        
+        
+    ],
+    owner:[
+        
+        'view_rooms',
+        'assign_room',
+        'view-self',
+        'view_pg',
+        'update_room',
+        'view_tenants',
+        'view_tenant',
+        'create_room',
+        'update_room',
+        'delete_room',
+        'update-self'
+    ],
+}
+
+module.exports=PERMISSIONS;

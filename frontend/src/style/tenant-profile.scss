@@ -1,0 +1,189 @@
+@use 'bootstrap' as *;
+
+$bg-primary: #0d1117;
+$card-bg: rgba(22, 27, 34, 0.85);
+$card-border: rgba(48, 54, 61, 0.5);
+$text-primary: #e6edf3;
+$text-muted: #8b949e;
+$accent: #58a6ff;
+$shadow: 0 8px 32px rgba(0, 0, 0, 0.37);
+$border-radius: 16px;
+
+.profile-container {
+    min-height: 100vh;
+    background:
+        radial-gradient(1000px circle at 10% 20%, rgba(88, 166, 255, 0.15), transparent 40%),
+        radial-gradient(800px circle at 90% 80%, rgba(255, 107, 107, 0.1), transparent 40%),
+        linear-gradient(135deg, #7c8faa 0%, #161b22 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+    color: $text-primary;
+}
+
+// === Profile Card (Glassmorphism) ===
+.profile-card {
+    width: 100%;
+    max-width: 1000px;
+    background: $card-bg;
+    border-radius: $border-radius;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid $card-border;
+    box-shadow: $shadow;
+    overflow: hidden;
+    padding: 2rem;
+}
+
+// === Header: Avatar + Info ===
+.profile-header {
+    display: flex;
+    align-items: flex-end;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.avatar-img {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    border: 4px solid $bg-primary;
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px $card-border;
+}
+
+.user-info h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0 0 0.25rem;
+    color: $text-primary;
+}
+
+.user-info .username {
+    font-size: 1.1rem;
+    color: $accent;
+    margin-bottom: 0.25rem;
+}
+
+.user-info .join-date {
+    font-size: 0.875rem;
+    color: $text-muted;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.btn-edit {
+    background: rgba(33, 38, 45, 0.8);
+    border: 1px solid $card-border;
+    color: $text-primary;
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    backdrop-filter: blur(4px);
+
+    &:hover {
+        background: rgba(48, 54, 61, 0.9);
+        color: #fff;
+        transform: translateY(-1px);
+    }
+}
+
+// === Tabs ===
+.tab-nav {
+    display: flex;
+    gap: 2rem;
+    border-bottom: 1px solid $card-border;
+    margin: 2rem 0 1.5rem;
+    flex-wrap: wrap;
+}
+
+.tab-link {
+    background: none;
+    border: none;
+    color: $text-muted;
+    padding: 0.75rem 0;
+    font-weight: 500;
+    font-size: 1rem;
+    position: relative;
+    text-transform: capitalize;
+    transition: color 0.2s;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: $accent;
+        transition: width 0.3s ease;
+    }
+
+    &:hover,
+    &.active {
+        color: $accent;
+    }
+
+    &.active::after {
+        width: 100%;
+    }
+}
+
+// === Stat Cards (Glass Cards) ===
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+}
+
+.stat-card {
+    background: rgba(33, 38, 45, 0.6);
+    border: 1px solid $card-border;
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+    backdrop-filter: blur(6px);
+    transition: all 0.2s;
+
+    &:hover {
+        transform: translateY(-4px);
+        background: rgba(48, 54, 61, 0.8);
+        box-shadow: 0 8px 20px rgba(243, 243, 244, 0.4);
+    }
+
+    .icon {
+        font-size: 1.75rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .value {
+        font-weight: 700;
+        font-size: 1.5rem;
+        margin: 0.25rem 0;
+    }
+
+    .label {
+        font-size: 0.8rem;
+        color: $text-muted;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+}
+
+// === Empty States ===
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: $text-muted;
+    font-size: 1.1rem;
+    background: rgba(243, 243, 244, 0.4);
+    border-radius: 12px;
+    backdrop-filter: blur(4px);
+}

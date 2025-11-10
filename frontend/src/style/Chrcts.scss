@@ -1,0 +1,10 @@
+.chrcts-container{
+    position: relative;
+    background-color: #e0e0e0;
+    margin-top: 70px;
+
+    @media (max-width: 768px) {
+        height: auto;
+        min-height: 8000px;
+    }
+}

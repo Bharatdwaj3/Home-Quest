@@ -1,0 +1,49 @@
+.content-wrapper {
+  flex: 1;
+  padding: 2rem 0;
+  background-color: #f8fafc !important;
+}
+.content-wrapper .visual-categories-section {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+.content-wrapper .visual-categories-section .category-row {
+  margin-bottom: 4rem;
+}
+.content-wrapper .visual-categories-section .category-row img {
+  height: 300px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.content-wrapper .visual-categories-section .category-row .category-content .category-title {
+  font-size: 2.5rem;
+}
+.content-wrapper .visual-categories-section .category-row .category-content .category-description {
+  color: #374151;
+  line-height: 1.8;
+}
+.content-wrapper .feature-categories {
+  margin-top: 3rem;
+  max-width: 1360px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.content-wrapper .feature-categories .card {
+  border: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.content-wrapper .feature-categories .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+.content-wrapper .feature-categories .card .feature-icon {
+  font-size: 3rem;
+}
+.content-wrapper .feature-categories .card .card-title {
+  color: #111827;
+}
+.content-wrapper .feature-categories .card .card-text {
+  color: #4b5563;
+}/*# sourceMappingURL=content.css.map */

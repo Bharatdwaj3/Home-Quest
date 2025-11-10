@@ -1,0 +1,65 @@
+@use './variables' as *;
+
+.content-wrapper {
+    flex: 1;
+    padding: 2rem 0;
+    background-color: $slate-light !important;
+
+    // Visual Categories Section - Replaces yellow text boxes
+    .visual-categories-section {
+        max-width: 1360px;
+        margin: 0 auto;
+        padding: 3rem 2rem;
+
+        .category-row {
+            margin-bottom: 4rem;
+
+            img {
+                height: 300px;
+                object-fit: cover;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            .category-content {
+                .category-title {
+                    font-size: 2.5rem;
+                }
+
+                .category-description {
+                    color: #374151;
+                    line-height: 1.8;
+                }
+            }
+        }
+    }
+
+    // Feature Cards Section
+    .feature-categories {
+        margin-top: 3rem;
+        max-width: 1360px;
+        margin-left: auto;
+        margin-right: auto;
+
+        .card {
+            border: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+            &:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            }
+
+            .feature-icon {
+                font-size: 3rem;
+            }
+
+            .card-title {
+                color: #111827;
+            }
+
+            .card-text {
+                color: #4b5563;
+            }
+        }
+    }
+}

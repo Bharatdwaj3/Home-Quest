@@ -1,0 +1,415 @@
+// SASS Variables for consistent styling - matching InsertRooms amber theme
+$amber-primary: #b45309;      // Amber-700 equivalent  
+$amber-light: #fef3c7;        // Amber-100 equivalent
+$amber-bg: #92400e;           // Darker amber for backgrounds
+$white: #ffffff;
+
+// Mixins for reusable styles
+@mixin amber-gradient {
+  background: linear-gradient(135deg, $amber-primary, $amber-bg);
+}
+
+@mixin smooth-transition {
+  transition: all 0.3s ease-in-out;
+}
+
+// Main container - matching InsertRooms layout with fixed dimensions
+.insert-pg-container {
+  @include amber-gradient;
+  height: 1200px;
+  width: 800px;
+  margin: 16rem;  // m-64 equivalent
+  padding: 1rem;
+  border-radius: 0.5rem;
+  
+  // Responsive design for smaller screens
+  @media (max-width: 768px) {
+    margin: 2rem;
+    width: calc(100% - 4rem);
+    height: auto;
+  }
+}
+
+// Message styling - matching InsertRooms h2 message
+.insert-pg-message {
+  color: $white;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+// Form styling - matching InsertRooms flex layout
+.insert-pg-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  
+  // Form group styling
+  > div {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+// Label styling - matching InsertRooms amber-100 labels
+.insert-pg-label {
+  color: $amber-light !important;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  font-size: 1rem;
+}
+
+// Form controls styling - matching InsertRooms input styling
+.form-control,
+.form-select {
+  @include smooth-transition;
+  width: 100%;
+  padding: 0.25rem;  // p-1 equivalent
+  margin-top: 0.25rem;  // mt-1 equivalent
+  border: 1px solid #d1d5db;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  
+  // Focus state
+  &:focus {
+    border-color: $amber-light;
+    box-shadow: 0 0 0 0.2rem rgba(254, 243, 199, 0.25);
+    outline: none;
+  }
+  
+  // Hover state
+  &:hover {
+    border-color: lighten($amber-primary, 20%);
+  }
+  
+  // Placeholder styling
+  &::placeholder {
+    color: #9ca3af;
+    opacity: 0.7;
+  }
+}
+
+// Submit button styling - matching InsertRooms button
+.insert-pg-submit-btn {
+  @include smooth-transition;
+  background-color: $white;
+  color: $amber-primary;
+  padding: 0.5rem;  // p-2 equivalent
+  border-radius: 0.25rem;
+  border: none;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  
+  // Hover state - matching InsertRooms hover effect
+  &:hover {
+    background-color: darken($white, 5%);
+    color: darken($amber-primary, 10%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  // Active state
+  &:active {
+    transform: translateY(0);
+  }
+  
+  // Focus state for accessibility
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba(180, 83, 9, 0.25);
+    outline: none;
+  }
+}
+
+// File input styling - matching overall theme
+input[type="file"] {
+  @include smooth-transition;
+  
+  &::-webkit-file-upload-button {
+    background-color: $amber-primary;
+    color: $white;
+    border: none;
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    margin-right: 0.5rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    
+    &:hover {
+      background-color: darken($amber-primary, 10%);
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 576px) {
+  .insert-pg-container {
+    margin: 1rem;
+    padding: 0.75rem;
+    width: calc(100% - 2rem);
+  }
+  
+  .insert-pg-message {
+    font-size: 1.25rem;
+  }
+  
+  .form-control,
+  .form-select {
+    font-size: 0.9rem;
+  }
+}
+  
+
+// Label styling with icons
+.insert-pg-label {
+  color: $text-dark !important;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  
+  // Icon styling within labels
+  i {
+    color: $accent-blue;
+    width: 16px;
+    text-align: center;
+  }
+}
+
+// Enhanced form controls
+.form-control,
+.form-select {
+  @include smooth-transition;
+  border: 2px solid #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 0.875rem 1rem;
+  font-size: 1rem;
+  background-color: $gray-light;
+  
+  // Focus state
+  &:focus {
+    @include form-focus-state;
+    background-color: $white;
+  }
+  
+  // Hover state
+  &:hover {
+    border-color: lighten($accent-blue, 30%);
+    background-color: $white;
+  }
+  
+  // Valid state
+  &:valid:not(:placeholder-shown) {
+    border-color: $success-green;
+  }
+  
+  // Placeholder styling
+  &::placeholder {
+    color: $gray-medium;
+    opacity: 0.7;
+  }
+}
+
+// Special styling for select elements
+.form-select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  
+  &:focus {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%231e40af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  }
+}
+
+// Submit button with professional styling
+.insert-pg-submit-btn {
+  @include smooth-transition;
+  @include professional-gradient;
+  color: $white;
+  border: none;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 1rem 2rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+  
+  // Hover effect with transform
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(30, 64, 175, 0.3);
+    
+    // Subtle shine effect
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+      );
+      animation: shine 0.6s;
+    }
+  }
+  
+  // Active state
+  &:active {
+    transform: translateY(0);
+  }
+  
+  // Disabled state
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  // Focus state for accessibility
+  &:focus {
+    box-shadow: 0 0 0 0.25rem rgba(30, 64, 175, 0.25);
+  }
+}
+
+// Alert styling improvements
+.alert {
+  border-radius: 0.75rem;
+  border: none;
+  font-weight: 500;
+  
+  // Success alert
+  &.alert-success {
+    background: linear-gradient(135deg, rgba($success-green, 0.1), rgba($success-green, 0.05));
+    color: darken($success-green, 15%);
+    border: 1px solid rgba($success-green, 0.2);
+  }
+  
+  // Error alert
+  &.alert-danger {
+    background: linear-gradient(135deg, rgba(#dc2626, 0.1), rgba(#dc2626, 0.05));
+    color: darken(#dc2626, 15%);
+    border: 1px solid rgba(#dc2626, 0.2);
+  }
+  
+  // Icon styling within alerts
+  i {
+    margin-right: 0.5rem;
+  }
+}
+
+// File input enhanced styling
+input[type="file"] {
+  padding: 0.875rem 1rem;
+  
+  &::-webkit-file-upload-button {
+    @include smooth-transition;
+    background: $accent-blue;
+    color: $white;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    
+    &:hover {
+      background: darken($accent-blue, 10%);
+      transform: translateY(-1px);
+    }
+  }
+}
+
+// Form text improvements
+.form-text {
+  color: $gray-medium !important;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+// Success state for file selection
+.text-success {
+  color: $success-green !important;
+  font-weight: 500;
+  
+  i {
+    color: $success-green;
+  }
+}
+
+// Loading spinner styling
+.spinner-border-sm {
+  width: 1rem;
+  height: 1rem;
+}
+
+// Responsive grid adjustments
+@media (max-width: 992px) {
+  .row .col-lg-6 {
+    margin-bottom: 1rem;
+  }
+}
+
+// Animation for card appearance
+.insert-pg-card {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+// Required field indicator
+.insert-pg-label::after {
+  content: '';
+}
+
+.insert-pg-label:has-text('*')::after {
+  content: ' *';
+  color: #dc2626;
+  font-weight: bold;
+}
+
+// Keyframe animations
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+// High contrast mode support
+@media (prefers-contrast: high) {
+  .form-control,
+  .form-select {
+    border-width: 3px;
+  }
+  
+  .insert-pg-submit-btn {
+    border: 2px solid $white;
+  }
+}
+
+// Reduced motion support
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

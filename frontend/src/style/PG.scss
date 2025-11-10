@@ -1,0 +1,118 @@
+$amber-bg: #fef3c7; // amber-100 equivalent
+$amber-dark: #78350f; // amber-950 equivalent
+$card-border-radius: 0.5rem;
+$transition-speed: 0.3s;
+
+// Main section styling
+.lodging-section {
+    position: relative;
+    height: 1500px;
+   // width: 100vw;
+    background-color: $amber-bg;
+    margin-top: 70px;
+
+    // Responsive height adjustment
+    @media (max-width: 768px) {
+        height: auto;
+        min-height: 1500px;
+    }
+}
+
+// Header section styling
+.lodging-header {
+    height: 200px;
+    width: 100vw;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 2rem;
+
+    .lodging-title {
+        border-bottom: 2px solid $amber-dark;
+        color: $amber-dark;
+        margin-left: 5rem;
+        padding-bottom: 0.5rem;
+        font-weight: 700;
+
+        // Responsive margin adjustment
+        @media (max-width: 768px) {
+            margin-left: 2rem;
+            font-size: 1.75rem;
+        }
+    }
+}
+
+// Cards container styling
+.lodging-cards-container {
+    max-width: 1500px;
+    padding-left: 200px;
+    padding-right: 2rem;
+
+    // Responsive padding adjustment
+    @media (max-width: 992px) {
+        padding-left: 3rem;
+    }
+
+    @media (max-width: 768px) {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+// Individual card styling
+.lodging-card {
+    border-radius: $card-border-radius;
+    transition: transform $transition-speed ease, box-shadow $transition-speed ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    // Hover effect
+    &:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    // Image styling
+    .lodging-card-img {
+        height: 200px;
+        object-fit: cover;
+        border-top-left-radius: $card-border-radius;
+        border-top-right-radius: $card-border-radius;
+    }
+
+    // Card body styling
+    .card-body {
+        background-color: #fff;
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .card-subtitle {
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .card-text {
+            font-size: 0.9rem;
+            color: #4b5563;
+            line-height: 1.5;
+
+            strong {
+                color: #1f2937;
+                font-weight: 600;
+            }
+        }
+    }
+}
+
+// Detail button styling
+.lodging-detail-btn {
+    width: 100%;
+    font-weight: 500;
+    transition: background-color $transition-speed ease;
+
+    &:hover {
+        background-color: darken(#0d6efd, 10%);
+    }
+}
