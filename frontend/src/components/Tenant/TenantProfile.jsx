@@ -6,6 +6,8 @@ import { FaCalendarAlt, FaVenusMars, FaHome } from 'react-icons/fa';
 import '../../style/tenant-profile.scss';
 
 import LocationSearch from '../functions/LocationSearch';   // <-- separate file
+import PgSearchGrid from '../functions/pgGridSearch';             // <-- separate file
+
 
 const TenantProfile = () => {
   const navigate = useNavigate();
@@ -16,7 +18,6 @@ const TenantProfile = () => {
   const [activeTab, setActiveTab] = useState('overview');
 
   // <-- new state for PG search results
-  const [nearbyPGs, setNearbyPGs] = useState([]);
 
   /* -------------------------------------------------
      Load tenant profile (unchanged)
@@ -141,31 +142,12 @@ const TenantProfile = () => {
               </div>
 
               {/* ---- Location Search ---- */}
-              <LocationSearch onSearchResults={setNearbyPGs} />
-
-              {/* Optional: show a short list of the latest results */}
-              {nearbyPGs.length > 0 && (
-                <div className="mt-3">
-                  <strong>Latest search:</strong>{' '}
-                  {nearbyPGs.slice(0, 3).map((pg) => (
-                    <span key={pg._id} className="mx-1">
-                      {pg.name} ({pg.distance?.toFixed(1)} km)
-                    </span>
-                  ))}
-                  {nearbyPGs.length > 3 && '...'}
-                </div>
-              )}
+              <PgSearchGrid />
             </>
           )}
 
           {/* ---------- MY ROOMS ---------- */}
-          {activeTab === 'my rooms' && (
-            <div className="empty-state">
-              {nearbyPGs.length
-                ? 'You haven’t saved any rooms yet. Try the search above!'
-                : 'No rooms saved yet.'}
-            </div>
-          )}
+          
         </div>
       </div>
     </div>

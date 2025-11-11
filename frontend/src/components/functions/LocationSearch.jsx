@@ -15,7 +15,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import axios from 'axios';
 
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:5001/api";
+const API_BASE = "http://localhost:4001/api";
 
 const LocationSearch = ({ onSearchResults }) => {
   const [searchAddress, setSearchAddress] = useState('');
@@ -34,7 +34,7 @@ const LocationSearch = ({ onSearchResults }) => {
     setError('');
 
     try {
-      const response = await axios.get(`${API_BASE}/pgs/search/location`, {
+      const response = await axios.get(`${API_BASE}/pg/search/location`, {
         params: { address: searchAddress, radius }
       });
 

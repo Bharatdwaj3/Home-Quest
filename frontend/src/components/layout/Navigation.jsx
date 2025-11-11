@@ -28,7 +28,6 @@ const Navigation = () => {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/rooms">Rooms</Nav.Link>
             <Nav.Link href="/map">Map</Nav.Link>
           </Nav>
           <Nav>

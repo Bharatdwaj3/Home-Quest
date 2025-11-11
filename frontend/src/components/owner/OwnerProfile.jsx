@@ -1,9 +1,8 @@
-// src/components/ownerProfile.jsx
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FaCalendarAlt, FaVenusMars, FaHome, FaUser, FaEdit } from 'react-icons/fa';
-import '../../style/owner-profile.scss'; // Import SASS
+import '../../style/owner-profile.scss'; 
 
 const OwnerProfile = () => {
   const navigate = useNavigate();
