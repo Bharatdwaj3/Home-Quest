@@ -31,6 +31,8 @@ import {
   BiShare,
 } from "react-icons/bi";
 
+import ShortestPathPanel from "../functions/ShortestPath";
+
 export default function PGDetailsPage() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -502,6 +504,11 @@ export default function PGDetailsPage() {
               </Card>
             </Col>
           </Row>
+          <Row className="mt-5">
+      <Col>
+        <ShortestPathPanel pg={pg} />
+      </Col>
+    </Row>
         </Container>
       </Container>
 

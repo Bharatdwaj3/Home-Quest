@@ -6,6 +6,7 @@ import {InsertTenant, TenantProfile} from './components/Tenant/index'
 import {InsertOwner, OwnerProfile} from './components/Owner/index'
 import {InsertPG, PgDetails} from './components/PG/index'
 import {Login, Signup} from './components/auth/index';
+import TenantDashboard from './components/Tenant/TenantDashboard'
 function App() {
 
   return (
@@ -17,7 +18,8 @@ function App() {
           <Route path='/rooms' element={<Product/> }/>  
           <Route path='/rooms/:id' element={<PgDetails/> }/>  
           <Route path='/map' element={<LocationMap/> }/>  
-          <Route path='/tenant-dashboard' element={<TenantProfile/> }/> 
+          <Route path='/tenant' element={<TenantDashboard/> }/> 
+          <Route path='/tenant-dashboard' element={<TenantProfile/> }/>  
           <Route path='/owner-dashboard' element={<OwnerProfile/> }/>  
           <Route path='/insertRooms' element={<InsertPG/> }/>  
           <Route path='/insertTenant' element={<InsertTenant/> }/>
