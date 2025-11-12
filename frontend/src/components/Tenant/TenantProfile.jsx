@@ -1,138 +1,144 @@
 // src/pages/TenantProfile.jsx
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { FaCalendarAlt, FaVenusMars, FaHome, FaEdit } from 'react-icons/fa'; // FIXED
-import '../../style/tenant-profile.scss';
-import UpdateProfileForm from '../form/UpdateProfileForm'; // FIXED
-import PgSearchGrid from '../functions/pgGridSearch';
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { FaCalendarAlt, FaVenusMars, FaHome, FaEdit } from "react-icons/fa";
+import "../../style/tenant-profile.scss";
+import UpdateProfileForm from "../form/UpdateProfileForm";
+import PgSearchGrid from "../functions/pgGridSearch";
 
 const TenantProfile = () => {
   const navigate = useNavigate();
   const [tenant, setTenant] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-  const [activeTab, setActiveTab] = useState('overview');
+  const [error, setError] = useState("");
+  const [activeTab, setActiveTab] = useState("overview");
 
+  // -----------------------------------------------------------------
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     if (!token) {
-      navigate('/login');
+      navigate("/login");
       return;
     }
 
-    const getMyProfile = async () => {
+    const load = async () => {
       try {
-        const payload = JSON.parse(atob(token.split('.')[1]));
+        const payload = JSON.parse(atob(token.split(".")[1]));
         const myUserId = payload.user?.id || payload.id;
 
-        const res = await axios.get(`http://localhost:4001/api/tenant/${myUserId}`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const { data } = await axios.get(
+          `http://localhost:4001/api/tenant/${myUserId}`,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
 
-        setTenant(res.data);
+        setTenant(data);
         setLoading(false);
-      } catch (err) {
-        setError('Failed to load profile');
+      } catch (e) {
+        setError("Failed to load profile");
         setLoading(false);
-        if (err.response?.status === 401) {
-          localStorage.removeItem('token');
-          navigate('/login');
+        if (e.response?.status === 401) {
+          navigate("/login");
         }
       }
     };
-
-    getMyProfile();
+    load();
   }, [navigate]);
 
-  if (loading) {
+  // -----------------------------------------------------------------
+  if (loading)
     return (
-      <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '80vh' }}>
+      <div
+        className="d-flex justify-content-center align-items-center"
+        style={{ minHeight: "80vh" }}
+      >
         <div className="spinner-border text-light" role="status">
           <span className="visually-hidden">Loading...</span>
         </div>
       </div>
     );
-  }
 
-  if (error) {
+  if (error)
     return (
       <div className="container py-5">
         <div className="alert alert-danger text-center">{error}</div>
       </div>
     );
-  }
 
-  const username = tenant.fullName?.toLowerCase().replace(/\s+/g, '_') || 'user';
+  const username =
+    tenant.fullName?.toLowerCase().replace(/\s+/g, "_") || "user";
 
+  // -----------------------------------------------------------------
   return (
     <div className="profile-container">
-      <div className="container" style={{ maxWidth: '1000px' }}>
+      <div className="profile-card">
         {/* Header */}
-        <div className="d-flex align-items-end gap-4 mb-4">
+        <div className="profile-header">
           <img
-            src={tenant.imageUrl || 'https://via.placeholder.com/100'}
+            src={tenant.imageUrl || "https://via.placeholder.com/110"}
             alt={tenant.fullName}
             className="avatar-img"
           />
-          <div>
-            <h1 className="username mb-0">@{username}</h1>
-            <p className="fullname text-light mb-1">{tenant.fullName}</p>
+          <div className="user-info">
+            <h1 className="username">@{username}</h1>
+            <p className="fullname">{tenant.fullName}</p>
           </div>
         </div>
 
         <hr className="border-secondary" />
 
         {/* Tabs */}
-        <div className="tab-nav d-flex gap-4 mb-4">
+        <div className="tab-nav">
           <button
-            className={`tab-link ${activeTab === 'overview' ? 'active' : ''}`}
-            onClick={() => setActiveTab('overview')}
+            className={`tab-link ${activeTab === "overview" ? "active" : ""}`}
+            onClick={() => setActiveTab("overview")}
           >
             Overview
           </button>
           <button
-            className={`tab-link ${activeTab === 'update-profile' ? 'active' : ''}`}
-            onClick={() => setActiveTab('update-profile')}
-          >
-           <FaEdit className="me-1" /> Update Profile
-          </button>
+  className={`tab-link ${activeTab === "update-profile" ? "active" : ""}`}
+  onClick={() => {
+    setActiveTab("update-profile");
+    navigate(".", { state: { embedded: true }, replace: true });
+  }}
+>
+  <FaEdit className="me-1" /> Update Profile
+</button>
         </div>
 
         {/* Tab Content */}
-        <div>
-          {activeTab === 'overview' && (
+        <div className="tab-content">
+          {activeTab === "overview" && (
             <>
-              <div className="row g-3 mb-4">
-                <div className="col-6 col-md-3">
-                  <div className="stat-card">
-                    <FaCalendarAlt className="icon text-primary" />
-                    <div className="value">{tenant.age || '-'}</div>
-                    <div className="label">Age</div>
-                  </div>
+              <div className="stat-grid">
+                <div className="stat-card">
+                  <FaCalendarAlt className="icon text-primary" />
+                  <div className="value">{tenant.age || "-"}</div>
+                  <div className="label">Age</div>
                 </div>
-                <div className="col-6 col-md-3">
-                  <div className="stat-card">
-                    <FaVenusMars className="icon text-success" />
-                    <div className="value">{tenant.gender || '-'}</div>
-                    <div className="label">Gender</div>
+                <div className="stat-card">
+                  <FaVenusMars className="icon text-success" />
+                  <div className="value">
+                    {tenant.gender?.charAt(0).toUpperCase() +
+                      tenant.gender?.slice(1) || "-"}
                   </div>
+                  <div className="label">Gender</div>
                 </div>
-                <div className="col-6 col-md-3">
-                  <div className="stat-card">
-                    <FaHome className="icon text-warning" />
-                    <div className="value">{tenant.family ? 'Yes' : 'No'}</div>
-                    <div className="label">Family</div>
-                  </div>
+                <div className="stat-card">
+                  <FaHome className="icon text-warning" />
+                  <div className="value">{tenant.family ? "Yes" : "No"}</div>
+                  <div className="label">Family</div>
                 </div>
               </div>
+
               <PgSearchGrid />
             </>
           )}
 
-          {activeTab === 'update-profile' && (
-            <div className="mt-4 p-6 bg-base-300/30 backdrop-blur-sm rounded-xl shadow-lg">
-              <UpdateProfileForm role="tenant" />
+          {activeTab === "update-profile" && (
+            <div className="mt-4">
+              {/* <-- embedded mode --> */}
+              <UpdateProfileForm  />
             </div>
           )}
         </div>

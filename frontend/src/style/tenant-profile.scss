@@ -195,3 +195,46 @@ $border-radius: 16px;
     border-radius: 12px;
     padding: 1.5rem;
 }
+
+/* --- PROFILE FORM (inside tab) --- */
+.profile-form-container {
+    background: rgba(33, 38, 45, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid $card-border;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: $shadow;
+}
+
+.profile-form-container .auth-form {
+    gap: 1.2rem;
+}
+
+.profile-form-container .form-group label {
+    color: $text-primary;
+    font-weight: 500;
+    margin-bottom: 0.35rem;
+    font-size: 0.9rem;
+}
+
+.profile-form-container .input-group input {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    color: $text-primary !important;
+    padding-left: 2.8rem !important;
+}
+
+.profile-form-container .input-group input:focus {
+    border-color: $accent !important;
+    box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.2) !important;
+}
+
+.profile-form-container .input-icon {
+    color: $accent;
+}
+
+.profile-form-container .auth-button {
+    background: linear-gradient(135deg, #58a6ff, #1f6feb) !important;
+    margin-top: 0.5rem !important;
+}
