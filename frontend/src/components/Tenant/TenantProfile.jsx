@@ -1,15 +1,14 @@
+// src/pages/TenantProfile.jsx
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { FaCalendarAlt, FaVenusMars, FaHome } from 'react-icons/fa';
+import { FaCalendarAlt, FaVenusMars, FaHome, FaEdit } from 'react-icons/fa'; // FIXED
 import '../../style/tenant-profile.scss';
-
-import PgSearchGrid from '../functions/pgGridSearch';           
-
+import UpdateProfileForm from '../form/UpdateProfileForm'; // FIXED
+import PgSearchGrid from '../functions/pgGridSearch';
 
 const TenantProfile = () => {
   const navigate = useNavigate();
-
   const [tenant, setTenant] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -46,7 +45,6 @@ const TenantProfile = () => {
     getMyProfile();
   }, [navigate]);
 
-
   if (loading) {
     return (
       <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '80vh' }}>
@@ -67,12 +65,10 @@ const TenantProfile = () => {
 
   const username = tenant.fullName?.toLowerCase().replace(/\s+/g, '_') || 'user';
 
-
   return (
     <div className="profile-container">
       <div className="container" style={{ maxWidth: '1000px' }}>
-
-      
+        {/* Header */}
         <div className="d-flex align-items-end gap-4 mb-4">
           <img
             src={tenant.imageUrl || 'https://via.placeholder.com/100'}
@@ -87,18 +83,23 @@ const TenantProfile = () => {
 
         <hr className="border-secondary" />
 
+        {/* Tabs */}
         <div className="tab-nav d-flex gap-4 mb-4">
-          {['overview', 'my rooms'].map((tab) => (
-            <button
-              key={tab}
-              className={`tab-link ${activeTab === tab ? 'active' : ''}`}
-              onClick={() => setActiveTab(tab)}
-            >
-              {tab.charAt(0).toUpperCase() + tab.slice(1)}
-            </button>
-          ))}
+          <button
+            className={`tab-link ${activeTab === 'overview' ? 'active' : ''}`}
+            onClick={() => setActiveTab('overview')}
+          >
+            Overview
+          </button>
+          <button
+            className={`tab-link ${activeTab === 'update-profile' ? 'active' : ''}`}
+            onClick={() => setActiveTab('update-profile')}
+          >
+           <FaEdit className="me-1" /> Update Profile
+          </button>
         </div>
 
+        {/* Tab Content */}
         <div>
           {activeTab === 'overview' && (
             <>
@@ -127,6 +128,12 @@ const TenantProfile = () => {
               </div>
               <PgSearchGrid />
             </>
+          )}
+
+          {activeTab === 'update-profile' && (
+            <div className="mt-4 p-6 bg-base-300/30 backdrop-blur-sm rounded-xl shadow-lg">
+              <UpdateProfileForm role="tenant" />
+            </div>
           )}
         </div>
       </div>

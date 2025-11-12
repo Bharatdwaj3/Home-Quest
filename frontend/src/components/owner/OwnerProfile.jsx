@@ -1,15 +1,17 @@
+// src/pages/OwnerProfile.jsx  (or wherever it lives)
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { FaCalendarAlt, FaVenusMars, FaHome, FaUser, FaEdit } from 'react-icons/fa';
-import '../../style/owner-profile.scss'; 
+import { FaCalendarAlt, FaVenusMars, FaHome, FaEdit } from 'react-icons/fa';
+import '../../style/owner-profile.scss';
+import UpdateProfileForm from '../form/UpdateProfileForm';   // <-- NEW  // <-- NEW
 
 const OwnerProfile = () => {
   const navigate = useNavigate();
   const [owner, setOwner] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [activeTab, setActiveTab] = useState('overview');
+  const [activeTab, setActiveTab] = useState('overview');   // default
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -75,23 +77,25 @@ const OwnerProfile = () => {
           <div>
             <h1 className="username mb-0">@{username}</h1>
             <p className="fullname text-light mb-1">{owner.fullName}</p>
-            
           </div>
         </div>
 
         <hr className="border-secondary" />
 
-        {/* Tabs */}
+        {/* Tabs – REMOVED "my rooms", ADDED "update profile" */}
         <div className="tab-nav d-flex gap-4 mb-4">
-          {['overview', 'my rooms'].map((tab) => (
-            <button
-              key={tab}
-              className={`tab-link ${activeTab === tab ? 'active' : ''}`}
-              onClick={() => setActiveTab(tab)}
-            >
-              {tab}
-            </button>
-          ))}
+          <button
+            className={`tab-link ${activeTab === 'overview' ? 'active' : ''}`}
+            onClick={() => setActiveTab('overview')}
+          >
+            Overview
+          </button>
+          <button
+            className={`tab-link ${activeTab === 'update-profile' ? 'active' : ''}`}
+            onClick={() => setActiveTab('update-profile')}
+          >
+            <FaEdit className="me-1" /> Update Profile
+          </button>
         </div>
 
         {/* Tab Content */}
@@ -108,7 +112,7 @@ const OwnerProfile = () => {
               <div className="col-6 col-md-3">
                 <div className="stat-card">
                   <FaVenusMars className="icon text-success" />
-                  <div className="value">{owner.gender || '-'}</div>
+                  <div className="value">{owner.gender === true ? 'Male' : owner.gender === false ? 'Female' : owner.gender || '-'}</div>
                   <div className="label">Gender</div>
                 </div>
               </div>
@@ -119,17 +123,14 @@ const OwnerProfile = () => {
                   <div className="label">Family</div>
                 </div>
               </div>
-              
             </div>
           )}
 
-          {activeTab === 'my rooms' && (
-            <div className="empty-state">No rooms saved yet.</div>
+          {activeTab === 'update-profile' && (
+            <div className="mt-4">
+              <UpdateProfileForm role="owner" />
+            </div>
           )}
-
-          
-
-          
         </div>
       </div>
     </div>

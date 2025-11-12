@@ -183,3 +183,11 @@ $border-radius: 16px;
     border-radius: 12px;
     backdrop-filter: blur(4px);
 }
+
+// Ensure form fits inside tab
+.tab-content .auth-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
