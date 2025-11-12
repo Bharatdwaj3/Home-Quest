@@ -5,7 +5,7 @@ import '../../style/auth.css';
 
 function Signup() {
   const [formData, setFormData] = useState({
-    fullName: '', email: '', accountType: 'user', password: '', confirmPassword: ''
+    fullName: '', email: '', accountType: 'tenant', password: '', confirmPassword: ''
   });
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -27,10 +27,10 @@ function Signup() {
     setIsLoading(true);
 
     try {
-      const res = await fetch('http://localhost:4001/api/auth/user/signup', {
+      const res = await fetch('http://localhost:4001/api/auth/user/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fullName, email, accountType, password }),
+        body: JSON.stringify({fullName,email,accountType,password }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -75,10 +75,10 @@ function Signup() {
             <label>Account Type</label>
             <div className="account-type-group">
               <label className="account-type-card">
-                <input type="radio" name="accountType" value="user" checked={accountType === 'user'} onChange={onChange} />
+                <input type="radio" name="accountType" value="tenant" checked={accountType === 'tenant'} onChange={onChange} />
                 <div className="card-content">
                   <FiUser size={24} />
-                  <strong>User</strong>
+                  <strong>Tenant</strong>
                   <small>Looking for properties</small>
                 </div>
               </label>

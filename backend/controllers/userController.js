@@ -8,13 +8,12 @@ const registerUser=async(req, res)=>{
         return res.status(400).json({ success: false, message: 'Missing request body' });
     }
 
-    const userName = req.body.userName;
     const fullName = req.body.fullName;
     const email = req.body.email;
     const accountType=req.body.accountType;
     const password=req.body.password;
 
-    if(!userName || !fullName || !email || !accountType || !password){
+    if(!fullName || !email || !accountType || !password){
       return res.status(400).json({message: 'All fields are req!!'});
     }
     const existingUser = await User.findOne({ email });
@@ -23,7 +22,6 @@ const registerUser=async(req, res)=>{
       }
 
     const user=new User({
-      userName: userName,
       fullName: fullName,
       email: email,
       accountType: accountType,

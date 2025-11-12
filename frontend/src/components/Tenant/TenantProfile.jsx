@@ -1,12 +1,10 @@
-// src/components/TenantProfile.jsx
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FaCalendarAlt, FaVenusMars, FaHome } from 'react-icons/fa';
 import '../../style/tenant-profile.scss';
 
-import LocationSearch from '../functions/LocationSearch';   // <-- separate file
-import PgSearchGrid from '../functions/pgGridSearch';             // <-- separate file
+import PgSearchGrid from '../functions/pgGridSearch';           
 
 
 const TenantProfile = () => {
@@ -17,11 +15,6 @@ const TenantProfile = () => {
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState('overview');
 
-  // <-- new state for PG search results
-
-  /* -------------------------------------------------
-     Load tenant profile (unchanged)
-  ------------------------------------------------- */
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -53,9 +46,7 @@ const TenantProfile = () => {
     getMyProfile();
   }, [navigate]);
 
-  /* -------------------------------------------------
-     Loading / error UI
-  ------------------------------------------------- */
+
   if (loading) {
     return (
       <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '80vh' }}>
@@ -76,14 +67,12 @@ const TenantProfile = () => {
 
   const username = tenant.fullName?.toLowerCase().replace(/\s+/g, '_') || 'user';
 
-  /* -------------------------------------------------
-     Main render
-  ------------------------------------------------- */
+
   return (
     <div className="profile-container">
       <div className="container" style={{ maxWidth: '1000px' }}>
 
-        {/* Header */}
+      
         <div className="d-flex align-items-end gap-4 mb-4">
           <img
             src={tenant.imageUrl || 'https://via.placeholder.com/100'}
@@ -98,7 +87,6 @@ const TenantProfile = () => {
 
         <hr className="border-secondary" />
 
-        {/* Tabs */}
         <div className="tab-nav d-flex gap-4 mb-4">
           {['overview', 'my rooms'].map((tab) => (
             <button
@@ -111,12 +99,9 @@ const TenantProfile = () => {
           ))}
         </div>
 
-        {/* Tab Content */}
         <div>
-          {/* ---------- OVERVIEW ---------- */}
           {activeTab === 'overview' && (
             <>
-              {/* Stats */}
               <div className="row g-3 mb-4">
                 <div className="col-6 col-md-3">
                   <div className="stat-card">
@@ -140,14 +125,9 @@ const TenantProfile = () => {
                   </div>
                 </div>
               </div>
-
-              {/* ---- Location Search ---- */}
               <PgSearchGrid />
             </>
           )}
-
-          {/* ---------- MY ROOMS ---------- */}
-          
         </div>
       </div>
     </div>

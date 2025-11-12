@@ -12,7 +12,6 @@ const ownerRoutes =require("./routes/ownerRoutes");
 const tenantRoutes =require("./routes/tenantRoutes");
 const pgRoutes =require("./routes/pgRoutes");
 const userRoutes=require("./routes/userRoutes");
-const locationRoutes =require("./routes/locationRoutes");
 
 const { PORT, SESSION_SECRECT, MONGO_URI } = require('./config/env.config');
 const connectDB=require('./config/db.config');
