@@ -1,16 +1,13 @@
-// UpdateProfileForm.jsx
-
+// src/pages/UpdateProfileForm.jsx
 import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FiMail, FiUser, FiCalendar, FiImage, FiCheck, FiPhone } from "react-icons/fi";
 import axios from "axios";
 
 export default function UpdateProfileForm() {
   const navigate = useNavigate();
-  const location = useLocation();
 
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [preview, setPreview] = useState("");
 
@@ -18,7 +15,7 @@ export default function UpdateProfileForm() {
     name: "", age: "", gender: "male", family: "false", phone: "", image: null,
   });
 
-  // --- JWT: Get userId & role directly from token ---
+  // --- Get userId & role from JWT ---
   const getUserData = () => {
     const token = localStorage.getItem("token");
     if (!token) return null;
@@ -36,18 +33,18 @@ export default function UpdateProfileForm() {
   const { userId, userRole } = getUserData() || {};
   const userEmail = JSON.parse(localStorage.getItem("user") || "{}").email || "";
 
-  // --- Redirect if not logged in ---
+  // --------------------------------------------------------------
+  // SINGLE useEffect: Auth guard + Load profile
+  // --------------------------------------------------------------
   useEffect(() => {
+    // 1. Redirect to login if not authenticated
     if (!userId || !userRole) {
       navigate("/login");
+      return;
     }
-  }, [userId, userRole, navigate]);
 
-  // --- Load profile data ---
-  useEffect(() => {
-    if (!userId || !userRole) return;
-
-    const load = async () => {
+    // 2. Load current profile
+    const loadProfile = async () => {
       setIsLoading(true);
       try {
         const { data } = await axios.get(
@@ -58,7 +55,12 @@ export default function UpdateProfileForm() {
         setFormData({
           name: data.name || "",
           age: data.age || "",
-          gender: data.gender === true ? "male" : data.gender === false ? "female" : data.gender || "male",
+          gender:
+            data.gender === true
+              ? "male"
+              : data.gender === false
+              ? "female"
+              : data.gender || "male",
           family: data.family ? "true" : "false",
           phone: data.phone?.toString() || "",
           image: null,
@@ -71,20 +73,12 @@ export default function UpdateProfileForm() {
       }
     };
 
-    load();
+    loadProfile();
   }, [userId, userRole, navigate]);
-
-  // --- Flash success message ---
-// --- Redirect if not logged in ---
-useEffect(() => {
-  const isEmbedded = location.state?.embedded;
-  if (!isEmbedded && (!userId || !userRole)) {
-    navigate("/login");
-  }
-}, [userId, userRole, navigate, location.state]);
 
   // --- Handlers ---
   const onChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+
   const onFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -95,8 +89,7 @@ useEffect(() => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    setError(""); 
-    setSuccess(""); 
+    setError("");
     setIsLoading(true);
 
     const body = new FormData();
@@ -114,8 +107,9 @@ useEffect(() => {
         { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
       );
 
+      // Redirect to dashboard after success
       navigate(userRole === "owner" ? "/owner-dashboard" : "/tenant-dashboard", {
-        state: { message: "Profile updated successfully!" }
+        state: { message: "Profile updated successfully!" },
       });
     } catch (e) {
       setError(e.response?.data?.msg || "Update failed");
@@ -124,14 +118,13 @@ useEffect(() => {
     }
   };
 
-  // --- Render Form ---
+  // --- Render ---
   return (
-    <div className="profile-form-container">
-      {success && <p className="success-message"><FiCheck /> {success}</p>}
-      {error && <p className="error-message">Error: {error}</p>}
+    <div className="profile-form-container max-w-2xl mx-auto p-6">
+      {error && <p className="error-message text-red-600 mb-4">Error: {error}</p>}
 
-      <form onSubmit={onSubmit} className="auth-form">
-        {/* Email */}
+      <form onSubmit={onSubmit} className="auth-form space-y-6">
+        {/* Email (Read-only) */}
         <div className="form-group">
           <label>Email</label>
           <div className="input-group">
@@ -145,7 +138,14 @@ useEffect(() => {
           <label htmlFor="name">Full Name *</label>
           <div className="input-group">
             <FiUser className="input-icon" />
-            <input id="name" name="name" type="text" value={formData.name} onChange={onChange} required />
+            <input
+              id="name"
+              name="name"
+              type="text"
+              value={formData.name}
+              onChange={onChange}
+              required
+            />
           </div>
         </div>
 
@@ -154,17 +154,31 @@ useEffect(() => {
           <label htmlFor="age">Age *</label>
           <div className="input-group">
             <FiCalendar className="input-icon" />
-            <input id="age" name="age" type="text" value={formData.age} onChange={onChange} required />
+            <input
+              id="age"
+              name="age"
+              type="text"
+              value={formData.age}
+              onChange={onChange}
+              required
+            />
           </div>
         </div>
 
         {/* Gender */}
         <div className="form-group">
           <label>Gender *</label>
-          <div className="flex gap-4">
-            {["male", "female"].map(g => (
-              <label key={g} className="flex items-center">
-                <input type="radio" name="gender" value={g} checked={formData.gender === g} onChange={onChange} className="mr-2" />
+          <div className="flex gap-6">
+            {["male", "female"].map((g) => (
+              <label key={g} className="flex items-center cursor-pointer">
+                <input
+                  type="radio"
+                  name="gender"
+                  value={g}
+                  checked={formData.gender === g}
+                  onChange={onChange}
+                  className="mr-2"
+                />
                 {g.charAt(0).toUpperCase() + g.slice(1)}
               </label>
             ))}
@@ -174,23 +188,37 @@ useEffect(() => {
         {/* Family */}
         <div className="form-group">
           <label>Family Member? *</label>
-          <div className="flex gap-4">
-            {["true", "false"].map(f => (
-              <label key={f} className="flex items-center">
-                <input type="radio" name="family" value={f} checked={formData.family === f} onChange={onChange} className="mr-2" />
+          <div className="flex gap-6">
+            {["true", "false"].map((f) => (
+              <label key={f} className="flex items-center cursor-pointer">
+                <input
+                  type="radio"
+                  name="family"
+                  value={f}
+                  checked={formData.family === f}
+                  onChange={onChange}
+                  className="mr-2"
+                />
                 {f === "true" ? "Yes" : "No"}
               </label>
             ))}
           </div>
         </div>
 
-        {/* Phone (owner only) */}
+        {/* Phone (Owner only) */}
         {userRole === "owner" && (
           <div className="form-group">
             <label htmlFor="phone">Phone *</label>
             <div className="input-group">
               <FiPhone className="input-icon" />
-              <input id="phone" name="phone" type="tel" value={formData.phone} onChange={onChange} required />
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                value={formData.phone}
+                onChange={onChange}
+                required
+              />
             </div>
           </div>
         )}
@@ -203,13 +231,22 @@ useEffect(() => {
             <input type="file" accept="image/*" onChange={onFileChange} className="file-input" />
           </div>
           {preview && (
-            <div className="mt-3 flex justify-center">
-              <img src={preview} alt="preview" className="w-32 h-32 object-cover rounded-full border-2 border-primary" />
+            <div className="mt-4 flex justify-center">
+              <img
+                src={preview}
+                alt="Preview"
+                className="w-32 h-32 object-cover rounded-full border-2 border-primary"
+              />
             </div>
           )}
         </div>
 
-        <button type="submit" className="auth-button w-full" disabled={isLoading}>
+        {/* Submit */}
+        <button
+          type="submit"
+          className="auth-button w-full mt-6"
+          disabled={isLoading}
+        >
           {isLoading ? <div className="loader"></div> : "Save Changes"}
         </button>
       </form>

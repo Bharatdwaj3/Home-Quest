@@ -19,7 +19,7 @@ const getOwner = async (req, res) => {
       { $match: { _id: new mongoose.Types.ObjectId(id), accountType: 'owner' } },
       {
         $lookup: {
-          from: 'Owner',
+          from: 'owner',
           localField: '_id',
           foreignField: 'userId',
           as: 'profile'

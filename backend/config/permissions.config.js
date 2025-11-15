@@ -29,11 +29,8 @@ const PERMISSIONS ={
         'update-self',
         'view_owners',
         'view_pg'
-        
-        
     ],
     owner:[
-        
         'view_rooms',
         'assign_room',
         'view-self',
@@ -44,6 +41,7 @@ const PERMISSIONS ={
         'create_room',
         'update_room',
         'delete_room',
+        'create_pg',
         'update-self'
     ],
 }

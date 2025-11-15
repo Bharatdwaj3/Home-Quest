@@ -7,6 +7,7 @@ import {InsertOwner, OwnerProfile} from './components/Owner/index'
 import {InsertPG, PgDetails} from './components/PG/index'
 import {Login, Signup} from './components/auth/index';
 import TenantDashboard from './components/Tenant/TenantDashboard'
+import UpdateProfileForm from './components/form/UpdateProfileForm'
 function App() {
 
   return (
@@ -21,9 +22,7 @@ function App() {
           <Route path='/tenant' element={<TenantDashboard/> }/> 
           <Route path='/tenant-dashboard' element={<TenantProfile/> }/>  
           <Route path='/owner-dashboard' element={<OwnerProfile/> }/>  
-          <Route path='/insertRooms' element={<InsertPG/> }/>  
-          <Route path='/insertTenant' element={<InsertTenant/> }/>
-          <Route path='/insertOwner' element={<InsertOwner/> }/>
+          <Route path='/update-user' element={<UpdateProfileForm/> }/>  
           <Route path="/login" element={<Login />} />
           <Route path="/signUp" element={<Signup />} />
           <Route/>  

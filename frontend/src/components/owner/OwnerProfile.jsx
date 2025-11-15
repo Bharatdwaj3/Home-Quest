@@ -1,17 +1,17 @@
-// src/pages/OwnerProfile.jsx  (or wherever it lives)
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FaCalendarAlt, FaVenusMars, FaHome, FaEdit } from 'react-icons/fa';
 import '../../style/owner-profile.scss';
-import UpdateProfileForm from '../form/UpdateProfileForm';   // <-- NEW  // <-- NEW
+
+import PgSearchGrid from "../functions/pgGridSearch";
 
 const OwnerProfile = () => {
   const navigate = useNavigate();
   const [owner, setOwner] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [activeTab, setActiveTab] = useState('overview');   // default
+  const [activeTab, setActiveTab] = useState('overview');  
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -67,7 +67,7 @@ const OwnerProfile = () => {
   return (
     <div className="profile-container">
       <div className="container" style={{ maxWidth: '1000px' }}>
-        {/* Header */}
+
         <div className="d-flex align-items-end gap-4 mb-4">
           <img
             src={owner.imageUrl || 'https://via.placeholder.com/100'}
@@ -82,7 +82,6 @@ const OwnerProfile = () => {
 
         <hr className="border-secondary" />
 
-        {/* Tabs – REMOVED "my rooms", ADDED "update profile" */}
         <div className="tab-nav d-flex gap-4 mb-4">
           <button
             className={`tab-link ${activeTab === 'overview' ? 'active' : ''}`}
@@ -90,15 +89,14 @@ const OwnerProfile = () => {
           >
             Overview
           </button>
-          <button
-            className={`tab-link ${activeTab === 'update-profile' ? 'active' : ''}`}
-            onClick={() => setActiveTab('update-profile')}
-          >
-            <FaEdit className="me-1" /> Update Profile
-          </button>
         </div>
+        <button
+          className={`tab-link ${activeTab === 'pgs' ? 'active' : ''}`}
+          onClick={() => setActiveTab('pgs')}
+        >
+          My PGs
+        </button>
 
-        {/* Tab Content */}
         <div>
           {activeTab === 'overview' && (
             <div className="row g-3">
@@ -126,12 +124,9 @@ const OwnerProfile = () => {
             </div>
           )}
 
-          {activeTab === 'update-profile' && (
-            <div className="mt-4">
-              <UpdateProfileForm role="owner" />
-            </div>
-          )}
+          <PgSearchGrid />
         </div>
+        {activeTab === 'pgs' && <PGManager />}
       </div>
     </div>
   );

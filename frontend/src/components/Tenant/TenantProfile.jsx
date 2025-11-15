@@ -1,10 +1,8 @@
-// src/pages/TenantProfile.jsx
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { FaCalendarAlt, FaVenusMars, FaHome, FaEdit } from "react-icons/fa";
 import "../../style/tenant-profile.scss";
-import UpdateProfileForm from "../form/UpdateProfileForm";
 import PgSearchGrid from "../functions/pgGridSearch";
 
 const TenantProfile = () => {
@@ -14,7 +12,6 @@ const TenantProfile = () => {
   const [error, setError] = useState("");
   const [activeTab, setActiveTab] = useState("overview");
 
-  // -----------------------------------------------------------------
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -45,7 +42,7 @@ const TenantProfile = () => {
     load();
   }, [navigate]);
 
-  // -----------------------------------------------------------------
+  
   if (loading)
     return (
       <div
@@ -68,11 +65,11 @@ const TenantProfile = () => {
   const username =
     tenant.fullName?.toLowerCase().replace(/\s+/g, "_") || "user";
 
-  // -----------------------------------------------------------------
+  
   return (
     <div className="profile-container">
       <div className="profile-card">
-        {/* Header */}
+
         <div className="profile-header">
           <img
             src={tenant.imageUrl || "https://via.placeholder.com/110"}
@@ -87,7 +84,7 @@ const TenantProfile = () => {
 
         <hr className="border-secondary" />
 
-        {/* Tabs */}
+
         <div className="tab-nav">
           <button
             className={`tab-link ${activeTab === "overview" ? "active" : ""}`}
@@ -95,18 +92,7 @@ const TenantProfile = () => {
           >
             Overview
           </button>
-          <button
-  className={`tab-link ${activeTab === "update-profile" ? "active" : ""}`}
-  onClick={() => {
-    setActiveTab("update-profile");
-    navigate(".", { state: { embedded: true }, replace: true });
-  }}
->
-  <FaEdit className="me-1" /> Update Profile
-</button>
         </div>
-
-        {/* Tab Content */}
         <div className="tab-content">
           {activeTab === "overview" && (
             <>
@@ -135,12 +121,7 @@ const TenantProfile = () => {
             </>
           )}
 
-          {activeTab === "update-profile" && (
-            <div className="mt-4">
-              {/* <-- embedded mode --> */}
-              <UpdateProfileForm  />
-            </div>
-          )}
+         
         </div>
       </div>
     </div>
