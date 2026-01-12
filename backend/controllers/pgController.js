@@ -22,18 +22,26 @@ const getPG = async (req, res) => {
 };
 
 const createPG = async (req, res) => {
-
-  try{
-    const PGData=req.body;
-    if(req.file){
-      PGData.imageUrl=req.file.path;
-      PGData.cloudinaryId=req.file.filename;
-    }    
-    const PGs =  await PG.create(PGData);
-    res.status(201).json(PG);
-  }catch(error){
-    console.error("Error creating PG: ".error);
-    res.status(500).json({message: error.message});
+  try {
+    const PGData = req.body;
+    if (typeof PGData.rooms === 'string') {
+      PGData.rooms = JSON.parse(PGData.rooms);
+    }
+    if (typeof PGData.avaliable === 'string') {
+      PGData.avaliable = PGData.avaliable === 'true';
+    }
+    if (PGData.latitude) PGData.latitude = parseFloat(PGData.latitude);
+    if (PGData.longitude) PGData.longitude = parseFloat(PGData.longitude);
+    
+    if (req.file) {
+      PGData.imageUrl = req.file.path;
+      PGData.cloudinaryId = req.file.filename;
+    }
+    const newPG = await PG.create(PGData);
+    res.status(201).json(newPG); 
+    
+  } catch(error) {
+    res.status(500).json({ message: error.message });
   }
 }
 const updatePG = async (req, res) => {

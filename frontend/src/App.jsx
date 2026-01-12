@@ -3,7 +3,7 @@ import {Home, Product} from './pages/index'
 import { BrowserRouter as Router, Routes, Route  } from 'react-router-dom'
 import { LocationMap, Navigation } from './components/layout/index'
 import {InsertTenant, TenantProfile} from './components/Tenant/index'
-import {InsertOwner, OwnerProfile} from './components/Owner/index'
+import {InsertOwner, OwnerProfile} from './components/owner/index'
 import {InsertPG, PgDetails} from './components/PG/index'
 import {Login, Signup} from './components/auth/index';
 import TenantDashboard from './components/Tenant/TenantDashboard'

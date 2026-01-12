@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { FaCalendarAlt, FaVenusMars, FaHome, FaEdit } from 'react-icons/fa';
 import '../../style/owner-profile.scss';
 
-import PgSearchGrid from "../functions/pgGridSearch";
+import PgGridSearch from "../functions/pgGridSearch";
+import PgManager from '../PG/PGManager';
 
 const OwnerProfile = () => {
   const navigate = useNavigate();
@@ -90,12 +91,7 @@ const OwnerProfile = () => {
             Overview
           </button>
         </div>
-        <button
-          className={`tab-link ${activeTab === 'pgs' ? 'active' : ''}`}
-          onClick={() => setActiveTab('pgs')}
-        >
-          My PGs
-        </button>
+        
 
         <div>
           {activeTab === 'overview' && (
@@ -124,9 +120,10 @@ const OwnerProfile = () => {
             </div>
           )}
 
-          <PgSearchGrid />
+          <PgGridSearch />
+          <PgManager/>
         </div>
-        {activeTab === 'pgs' && <PGManager />}
+        
       </div>
     </div>
   );

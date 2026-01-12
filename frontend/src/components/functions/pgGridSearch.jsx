@@ -1,8 +1,3 @@
-/* --------------------------------------------------------------
-   FILE: src/components/functions/pgGridSearch.jsx
-   PURPOSE: PG search grid – now visually identical to TenantProfile
-   -------------------------------------------------------------- */
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Container from "react-bootstrap/Container";
@@ -25,17 +20,15 @@ import {
   BiSearch,
 } from "react-icons/bi";
 
-import "../../style/tenant-profile.scss"   // <-- SAME SCSS as TenantProfile
+import "../../style/tenant-profile.scss"  
 
 function PgGridSearch() {
-  // ────── 1. STATE ──────
   const [pgs, setPgs] = useState([]);
   const [filteredPgs, setFilteredPgs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [searchCity, setSearchCity] = useState("");
 
-  // ────── 2. FETCH ALL PGs ──────
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -61,7 +54,6 @@ function PgGridSearch() {
       });
   }, []);
 
-  // ────── 3. SEARCH BY CITY ──────
   const handleSearch = () => {
     if (!searchCity.trim()) {
       setFilteredPgs(pgs);
