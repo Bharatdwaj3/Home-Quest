@@ -1,5 +1,5 @@
 const { default: mongoose } = require("mongoose");
-const PG = require("../models/PGModel");
+const PG = require("../models/pgModel");
 const cloudinary = require("../services/cloudinary");
  
 const getPGs = async (req, res) => {
